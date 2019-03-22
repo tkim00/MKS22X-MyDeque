@@ -13,17 +13,34 @@ public class MyDeque<E>{
     data = (E[])new Object[initialCapacity];
     size = 0;
     start = 0;
-    start = 0;
+    end = 0;
   }
   public int size(){
     return size;
   }
   public String toString(){
-    String s = "{";
-    for (int i = start; i < size; i++) {
-      s+=data[i]+" ";
+    String str = "{";
+    int s = start;
+    int e = end;
+    if (s >= e) {
+      for (int i = 0; i < size; i++) {
+        if (s < 0) {
+          s = data.length-1;
+        }
+        str+=data[s]+" ";
+        s--;
+      }
+    } else {
+      for (int i = 0; i < size; i++) {
+        if (s > data.length-1) {
+          s = 0;
+        }
+        str+=data[s]+" ";
+        s++;
+      }
     }
-    return s += "}";
+    str += "}";
+    return str;
   }
   public void addFirst(E element){
     if (start > 0) {
