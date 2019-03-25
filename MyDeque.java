@@ -1,3 +1,5 @@
+import java.lang.Exception;
+
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -87,7 +89,7 @@ public class MyDeque<E>{
       size--;
     } else {
       data[start] = 0;
-      start = 0
+      start = 0;
       size--;
     }
     return element;
