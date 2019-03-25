@@ -55,7 +55,7 @@ public class MyDeque<E>{
       size++;
     } else {
       data[data.length-1] = element;
-      start = data.length-1
+      start = data.length-1;
       size++;
     }
   }
@@ -76,8 +76,42 @@ public class MyDeque<E>{
       size++;
     }
   }
-  public E removeFirst(){ }
-  public E removeLast(){ }
-  public E getFirst(){ }
-  public E getLast(){ }
+  public E removeFirst(){
+    if (data.length == 0) {
+      throw new NoSuchElementException();
+    }
+    E element = data[start];
+    if (start < data.length-1) {
+      data[start] = 0;
+      start++;
+      size--;
+    } else {
+      data[start] = 0;
+      start = 0
+      size--;
+    }
+    return element;
+  }
+  public E removeLast(){
+    if (data.length == 0) {
+      throw new NoSuchElementException();
+    }
+    E element = data[end];
+    if (end > 0) {
+      data[end] = 0;
+      end--;
+      size--;
+    } else {
+      data[end] = 0;
+      end = data.length-1;
+      size--;
+    }
+    return element;
+  }
+  public E getFirst(){
+    return data[start];
+  }
+  public E getLast(){
+    return data[end];
+  }
 }
