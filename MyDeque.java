@@ -41,6 +41,7 @@ public class MyDeque<E>{
         s++;
       }
     }
+    str = str.trim();
     str += "}";
     return str;
   }
@@ -48,34 +49,44 @@ public class MyDeque<E>{
     if (element == null) {
       throw new NullPointerException();
     }
-    // if (size > data.length) {
+    // if (size == data.length) {
     //   resize();
     // }
-    if (start > 0) {
-      data[start-1] = element;
-      start--;
+    if (size == 0) {
+      data[start] = element;
       size++;
     } else {
-      data[data.length-1] = element;
-      start = data.length-1;
-      size++;
+      if (start > 0) {
+        data[start-1] = element;
+        start--;
+        size++;
+      } else {
+        data[data.length-1] = element;
+        start = data.length-1;
+        size++;
+      }
     }
   }
   public void addLast(E element){
     if (element == null) {
       throw new NullPointerException();
     }
-    // if (size > data.length) {
+    // if (size == data.length) {
     //   resize();
     // }
-    if (end < data.length-1) {
-      data[end+1] = element;
-      end++;
+    if (size == 0) {
+      data[end] = element;
       size++;
     } else {
-      data[0] = element;
-      end = 0;
-      size++;
+      if (end < data.length-1) {
+        data[end+1] = element;
+        end++;
+        size++;
+      } else {
+        data[0] = element;
+        end = 0;
+        size++;
+      }
     }
   }
   public E removeFirst(){
@@ -83,14 +94,19 @@ public class MyDeque<E>{
       throw new NoSuchElementException();
     }
     E element = data[start];
-    if (start < data.length-1) {
+    if (size == 1) {
       data[start] = null;
-      start++;
       size--;
     } else {
-      data[start] = null;
-      start = 0;
-      size--;
+      if (start < data.length-1) {
+        data[start] = null;
+        start++;
+        size--;
+      } else {
+        data[start] = null;
+        start = 0;
+        size--;
+      }
     }
     return element;
   }
@@ -99,14 +115,19 @@ public class MyDeque<E>{
       throw new NoSuchElementException();
     }
     E element = data[end];
-    if (end > 0) {
+    if (size == 1) {
       data[end] = null;
-      end--;
       size--;
     } else {
-      data[end] = null;
-      end = data.length-1;
-      size--;
+      if (end > 0) {
+        data[end] = null;
+        end--;
+        size--;
+      } else {
+        data[end] = null;
+        end = data.length-1;
+        size--;
+      }
     }
     return element;
   }
@@ -121,5 +142,10 @@ public class MyDeque<E>{
       throw new NoSuchElementException();
     }
     return data[end];
+  }
+  private void resize() {
+    if (start < end) {
+
+    }
   }
 }
