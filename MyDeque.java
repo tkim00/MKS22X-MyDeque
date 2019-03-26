@@ -1,4 +1,4 @@
-import java.lang.Exception;
+import java.util.*;
 
 public class MyDeque<E>{
   private E[] data;
@@ -79,41 +79,47 @@ public class MyDeque<E>{
     }
   }
   public E removeFirst(){
-    if (data.length == 0) {
+    if (size == 0) {
       throw new NoSuchElementException();
     }
     E element = data[start];
     if (start < data.length-1) {
-      data[start] = 0;
+      data[start] = null;
       start++;
       size--;
     } else {
-      data[start] = 0;
+      data[start] = null;
       start = 0;
       size--;
     }
     return element;
   }
   public E removeLast(){
-    if (data.length == 0) {
+    if (size == 0) {
       throw new NoSuchElementException();
     }
     E element = data[end];
     if (end > 0) {
-      data[end] = 0;
+      data[end] = null;
       end--;
       size--;
     } else {
-      data[end] = 0;
+      data[end] = null;
       end = data.length-1;
       size--;
     }
     return element;
   }
   public E getFirst(){
+    if (size == 0) {
+      throw new NoSuchElementException();
+    }
     return data[start];
   }
   public E getLast(){
+    if (size == 0) {
+      throw new NoSuchElementException();
+    }
     return data[end];
   }
 }
