@@ -49,18 +49,19 @@ public class MyDeque<E>{
     if (element == null) {
       throw new NullPointerException();
     }
-    // if (size == data.length) {
-    //   resize();
-    // }
+    if (size == data.length) {
+      resize();
+    }
     if (size == 0) {
       data[start] = element;
       size++;
     } else {
-      if (start > 0) {
+      if (start > 0) { //com
         data[start-1] = element;
         start--;
         size++;
-      } else {
+      } if (start == 0) {
+        //{ //compare start and end
         data[data.length-1] = element;
         start = data.length-1;
         size++;
@@ -71,9 +72,9 @@ public class MyDeque<E>{
     if (element == null) {
       throw new NullPointerException();
     }
-    // if (size == data.length) {
-    //   resize();
-    // }
+    if (size == data.length) {
+      resize();
+    }
     if (size == 0) {
       data[end] = element;
       size++;
@@ -144,9 +145,26 @@ public class MyDeque<E>{
     return data[end];
   }
   private void resize() {
-    E[] temp;
-    if (start < end) {
-
+    E[] temp = new E[size*2];
+    if (end < start) {
+      int k = 0;
+      for (int i = start; i < data.length; i++) {
+        temp[k] = data[i];
+        k++;
+      }
+      for (int i = 0; i <= end; i++) {
+        temp[k] = data[i];
+        k++;
+      }
+      end = k;
+    } else {
+      int k = 0;
+      for (int i = start; i <= end; i++) {
+        temp[k] = data[i];
+        k++;
+      }
+      end = k;
     }
+    start = 0;
   }
 }
