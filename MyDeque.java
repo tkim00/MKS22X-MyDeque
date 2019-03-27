@@ -144,6 +144,7 @@ public class MyDeque<E>{
     return data[end];
   }
   private void resize() {
+    E[] temp;
     if (start < end) {
 
     }
