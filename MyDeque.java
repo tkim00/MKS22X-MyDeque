@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class MyDeque<E>{
   private E[] data;
@@ -21,11 +22,11 @@ public class MyDeque<E>{
     return size;
   }
   public String toString(){
-    System.out.println(data.length);
-    for (int i = 0; i < data.length; i++) {
-      System.out.print(data[i]);
-    }
-    String str = "{";
+    //System.out.println(data.length);
+    // for (int i = 0; i < data.length; i++) {
+    //   System.out.print(data[i]);
+    // }
+    String str = "[";
     int s = start;
     int e = end;
     // if (s >= e) {
@@ -49,11 +50,15 @@ public class MyDeque<E>{
       if (s > data.length-1) {
         s = 0;
       }
-      str+=data[s]+" ";
+      str+=data[s] + ", ";
       s++;
     }
-    str = str.trim();
-    str += "}";
+    //str = str.trim();
+    if (str.length() > 2) {  //simply for aesthetic purpose
+      str = str.substring(0, str.length()-2);
+    }
+    // str = str.strip(",");
+    str+="]";
     return str;
   }
   public void addFirst(E element){
