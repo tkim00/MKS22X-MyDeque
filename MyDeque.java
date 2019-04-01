@@ -21,25 +21,36 @@ public class MyDeque<E>{
     return size;
   }
   public String toString(){
+    System.out.println(data.length);
+    for (int i = 0; i < data.length; i++) {
+      System.out.print(data[i]);
+    }
     String str = "{";
     int s = start;
     int e = end;
-    if (s >= e) {
-      for (int i = 0; i < size; i++) {
-        if (s < 0) {
-          s = data.length-1;
-        }
-        str+=data[s]+" ";
-        s--;
+    // if (s >= e) {
+    //   for (int i = 0; i < size; i++) {
+    //     if (s < 0) {
+    //       s = data.length-1;
+    //     }
+    //     str+=data[s]+" ";
+    //     s++;
+    //   }
+    // } else {
+    //   for (int i = 0; i < size; i++) {
+    //     if (s > data.length-1) {
+    //       s = 0;
+    //     }
+    //     str+=data[s]+" ";
+    //     s++;
+    //   }
+    // }
+    for (int i = 0; i < size; i++) {
+      if (s > data.length-1) {
+        s = 0;
       }
-    } else {
-      for (int i = 0; i < size; i++) {
-        if (s > data.length-1) {
-          s = 0;
-        }
-        str+=data[s]+" ";
-        s++;
-      }
+      str+=data[s]+" ";
+      s++;
     }
     str = str.trim();
     str += "}";
@@ -60,7 +71,7 @@ public class MyDeque<E>{
         data[start-1] = element;
         start--;
         size++;
-      } if (start == 0) {
+      } else {
         //{ //compare start and end
         data[data.length-1] = element;
         start = data.length-1;
@@ -145,26 +156,37 @@ public class MyDeque<E>{
     return data[end];
   }
   private void resize() {
-    E[] temp = new E[size*2];
-    if (end < start) {
-      int k = 0;
-      for (int i = start; i < data.length; i++) {
-        temp[k] = data[i];
-        k++;
+    E[] temp = (E[])new Object[size*2];
+    //System.out.println(size);
+    // if (end < start) {
+    //   int k = 0;
+    //   for (int i = start; i < data.length; i++) {
+    //     temp[k] = data[i];
+    //     k++;
+    //   }
+    //   for (int i = 0; i <= end; i++) {
+    //     temp[k] = data[i];
+    //     k++;
+    //   }
+    //   end = k;
+    // } else {
+    //   int k = 0;
+    //   for (int i = start; i <= end; i++) {
+    //     temp[k] = data[i];
+    //     k++;
+    //   }
+    //   end = k;
+    // }
+    int s = start;
+    int e = end;
+    for (int i = 0; i < size; i++) {
+      if (s > data.length-1) {
+        s = 0;
       }
-      for (int i = 0; i <= end; i++) {
-        temp[k] = data[i];
-        k++;
-      }
-      end = k;
-    } else {
-      int k = 0;
-      for (int i = start; i <= end; i++) {
-        temp[k] = data[i];
-        k++;
-      }
-      end = k;
+      temp[i] = data[s];
+      s++;
     }
     start = 0;
+    data = Arrays.copyOf(temp, temp.length);
   }
 }
