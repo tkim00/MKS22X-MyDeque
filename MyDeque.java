@@ -26,7 +26,7 @@ public class MyDeque<E>{
     // for (int i = 0; i < data.length; i++) {
     //   System.out.print(data[i]);
     // }
-    String str = "[";
+    String str = "{";
     int s = start;
     int e = end;
     // if (s >= e) {
@@ -58,7 +58,7 @@ public class MyDeque<E>{
       str = str.substring(0, str.length()-2);
     }
     // str = str.strip(",");
-    str+="]";
+    str+="}";
     return str;
   }
   public void addFirst(E element){
@@ -192,6 +192,7 @@ public class MyDeque<E>{
       s++;
     }
     start = 0;
+    end = data.length-1; //this fixed it <-------
     data = Arrays.copyOf(temp, temp.length);
   }
 }
